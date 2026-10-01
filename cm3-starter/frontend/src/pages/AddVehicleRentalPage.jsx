@@ -70,6 +70,7 @@ const AddVehicleRentalPage = () => {
 
     const success = await addVehicle(newVehicle);
      if (success) {
+      navigate("/");
       console.log("Vehicle Added Successfully");
       navigate("/");
     } else {
@@ -181,7 +182,7 @@ const AddVehicleRentalPage = () => {
           onChange={(e) => setInsurancePolicy(e.target.value)}
         />
 
-        <button onClick={() => navigate("/")}>Add Vehicle Rental</button>
+        <button>Add Vehicle Rental</button>
       </form>
     </div>
   );
