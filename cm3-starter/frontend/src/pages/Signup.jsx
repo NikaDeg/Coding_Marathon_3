@@ -61,6 +61,7 @@ const Signup = ({ setIsAuthenticated }) => {
                 <input {...city}/>
                 <label>Years of Experience:</label>
                 <input {...yearsOfExperience}/>
+                <button>Sign up</button>
             </form>
         </div>
     )
