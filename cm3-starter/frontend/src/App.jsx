@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/HomePage";
 import AddVehicleRentalPage from "./pages/AddVehicleRentalPage";
-import VehicleRentalPage from "./pages/AddVehicleRentalPage";
+import VehicleRentalPage from "./pages/VehicleRentalPage";
 import EditVehiclePage from "./pages/EditVehicleRentalPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
