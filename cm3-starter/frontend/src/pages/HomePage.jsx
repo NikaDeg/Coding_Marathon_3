@@ -3,9 +3,9 @@ import VehicleRentalListings from "../components/VehicleRentalListings";
 
 const Home = () => {
 
-  const [vehicles, setVehicles] = useState(null)
+  const [vehicles, setVehicles] = useState([])
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchVehicles = async () => {

@@ -8,6 +8,7 @@ const {
 } = require("./middleware/customMiddleware");
 require("dotenv").config();
 const vehicleRentalRouter = require("./routes/vehicleRentalRouter");
+const path = require("path")
 
 const app = express();
 
@@ -20,6 +21,11 @@ connectDB();
 // Routes
 app.use("/api/vehicleRentals", vehicleRentalRouter);
 //app.use("/api/users", userRouter)
+app.use(express.static(path.join(__dirname, "view")));
+app.use((req, res, next) => {
+  if (req.path.startsWith("/api")) return next();
+  res.sendFile(path.join(__dirname, "view", "index.html"));
+});
 
 // Error handling
 app.use(unknownEndpoint);
