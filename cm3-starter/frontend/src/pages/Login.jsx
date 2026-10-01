@@ -4,16 +4,19 @@ import { useNavigate } from "react-router-dom";
 
 const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
-  const name = useField("name");
+  const username = useField("text");
   const password = useField("password");
 
   const { login, error } = useLogin("/api/users/login");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await login({ name: name.value, password: password.value });
-    if (!error) {
-      console.log("success");
+    const success = await login({
+      username: username.value,
+      password: password.value,
+    });
+
+    if (success) {
       setIsAuthenticated(true);
       navigate("/");
     }
@@ -23,11 +26,12 @@ const Login = ({ setIsAuthenticated }) => {
     <div className="create">
       <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
-        <label>Name:</label>
-        <input {...name} />
+        <label>Username:</label>
+        <input {...username} />
         <label>Password:</label>
         <input {...password} />
         <button>Log in</button>
+        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );

@@ -20,7 +20,7 @@ const Signup = ({ setIsAuthenticated }) => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-        await signup({
+        const success = await signup({
             name: name.value,
             username: username.value,
             password: password.value,
@@ -31,6 +31,12 @@ const Signup = ({ setIsAuthenticated }) => {
             city: city.value,
             yearsOfExperience: yearsOfExperience.value
         })
+
+
+        if (success) {
+            setIsAuthenticated(true)
+            navigate("/")
+        }
 
         if (!error) {
             console.log("success")
