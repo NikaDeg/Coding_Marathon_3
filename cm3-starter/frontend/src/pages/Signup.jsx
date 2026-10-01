@@ -1,4 +1,4 @@
-import { use } from "react";
+import { useState } from "react";
 import useField from "../hooks/useField";
 import useSignup from "../hooks/useSignup";
 import { useNavigate } from "react-router-dom";
@@ -27,9 +27,9 @@ const Signup = ({ setIsAuthenticated }) => {
             phone_number: phone_number.value,
             license_number: license_number.value,
             date_of_birth: date_of_birth.value,
-            licenseExpiryDate: address.licenseExpiryDate.value,
-            city: address.city.value,
-            yearsOfExperience: address.yearsOfExperience.value
+            licenseExpiryDate: licenseExpiryDate.value,
+            city: city.value,
+            yearsOfExperience: yearsOfExperience.value
         })
 
         if (!error) {
