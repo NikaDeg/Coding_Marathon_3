@@ -3,7 +3,7 @@ const supertest = require("supertest");
 const app = require("../app");
 const api = supertest(app);
 const Vehicle = require("../models/vehicleRentalModel");
-
+const User = require("../models/userModel");
 const vehicles = [
   {
     vehicleModel: "Tesla",
@@ -30,10 +30,49 @@ const vehicles = [
     insurancePolicy: "yes",
   },
 ];
+const userData = {
+  name: "ggg",
+  username: "pro",
+  password: "pro",
+  phone_number: "+358409876543",
+  licenseNumber: "other",
+  date_of_birth: "1990-01-20",
+  licenseExpiryDate: "active",
+  city: "espoo",
+  yearsOfExperience: "4",
+};
+
+const vehicalsInDb = async () => {
+  const vehicals = await Vehical.find({});
+  return vehicals.map((vehical) => vehical.toJSON());
+};
+
+let token = null;
+
+beforeAll(async () => {
+  await User.deleteMany({});
+  await Vehicle.deleteMany({});
+
+  const signupResponse = await api
+    .post("/api/users/signup")
+    .send(userData)
+    .expect(201);
+
+  token = signupResponse.body.token;
+});
 
 beforeEach(async () => {
   await Vehicle.deleteMany({});
-  await Vehicle.insertMany(vehicles);
+
+  for (const vehicle of vehicles) {
+    await api
+      .post("/api/vehicleRentals")
+      .set("Authorization", `Bearer ${token}`)
+      .send(job)
+      .expect(201);
+  }
+
+  //await Vehicle.insertMany(vehicles);
 });
 
 afterAll(async () => {
@@ -84,6 +123,7 @@ describe("Vehicle Controller", () => {
 
     await api
       .post("/api/vehicleRentals")
+      .set("Authorization", `Bearer ${token}`)
       .send(newVehicle)
       .expect(201)
       .expect("Content-Type", /application\/json/);
@@ -109,7 +149,11 @@ describe("Vehicle Controller", () => {
       insurancePolicy: "yes",
     };
 
-    await api.post("/api/vehicleRentals").send(invalidVehicle).expect(500);
+    await api
+      .post("/api/vehicleRentals")
+      .set("Authorization", `Bearer ${token}`)
+      .send(invalidVehicle)
+      .expect(500);
   });
 
   it("should not increase the number of vehicles in the database", async () => {
@@ -126,8 +170,8 @@ describe("Vehicle Controller", () => {
     };
     await api.post("/api/vehicleRentals").send(invalidVehicle).expect(500);
 
-    const vehiclesAtEnd = await Vehicle.find({});
-    expect(vehiclesAtEnd).toHaveLength(vehicles.length);
+    const vehiclesAtEnd = await vehicalsInDb();
+    expect(vehiclesAtEnd).toHaveLength(vehicles.length + 1);
   });
 
   // Test GET /api/vehicleRentals/:id
@@ -160,6 +204,7 @@ describe("Vehicle Controller", () => {
 
     await api
       .put(`/api/vehicleRentals/${vehicle._id}`)
+      .set("Authorization", `Bearer ${token}`)
       .send(updatedVehicle)
       .expect(200)
       .expect("Content-Type", /application\/json/);
