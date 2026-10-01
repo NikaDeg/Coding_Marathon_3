@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useField from "../hooks/useField";
 import useSignup from "../hooks/useSignup";
 import { useNavigate } from "react-router-dom";
@@ -25,21 +24,16 @@ const Signup = ({ setIsAuthenticated }) => {
             username: username.value,
             password: password.value,
             phone_number: phone_number.value,
-            license_number: license_number.value,
+            licenseNumber: license_number.value,
             date_of_birth: date_of_birth.value,
-            licenseExpiryDate: licenseExpiryDate.value,
-            city: city.value,
-            yearsOfExperience: yearsOfExperience.value
+            address: {
+                licenseExpiryDate: licenseExpiryDate.value,
+                city: city.value,
+                yearsOfExperience: yearsOfExperience.value,
+            },
         })
 
-
         if (success) {
-            setIsAuthenticated(true)
-            navigate("/")
-        }
-
-        if (!error) {
-            console.log("success")
             setIsAuthenticated(true)
             navigate("/")
         }
@@ -68,10 +62,10 @@ const Signup = ({ setIsAuthenticated }) => {
                 <label>Years of Experience:</label>
                 <input {...yearsOfExperience}/>
                 <button>Sign up</button>
+                {error && <div className="error">{error}</div>}
             </form>
         </div>
     )
-
 }
 
 export default Signup
