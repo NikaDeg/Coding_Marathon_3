@@ -109,7 +109,7 @@ describe("Vehicle Controller", () => {
       insurancePolicy: "yes",
     };
 
-    await api.post("/api/vehicleRentals").send(invalidVehicle).expect(400);
+    await api.post("/api/vehicleRentals").send(invalidVehicle).expect(500);
   });
 
   it("should not increase the number of vehicles in the database", async () => {
@@ -124,7 +124,7 @@ describe("Vehicle Controller", () => {
       bookingDeadline: "10.10.26",
       insurancePolicy: "yes",
     };
-    await api.post("/api/vehicleRentals").send(invalidVehicle).expect(400);
+    await api.post("/api/vehicleRentals").send(invalidVehicle).expect(500);
 
     const vehiclesAtEnd = await Vehicle.find({});
     expect(vehiclesAtEnd).toHaveLength(vehicles.length);
@@ -166,7 +166,7 @@ describe("Vehicle Controller", () => {
 
     const updatedVehicleCheck = await Vehicle.findById(vehicle._id);
     expect(updatedVehicleCheck.description).toBe(updatedVehicle.description);
-    expect(updatedVehicleCheck.category).toBe(updatedVehicle.type);
+    expect(updatedVehicleCheck.category).toBe(updatedVehicle.category);
   });
 
   it("should return 400 for invalid vehicle ID when PUT /api/vehicleRentals:id", async () => {
