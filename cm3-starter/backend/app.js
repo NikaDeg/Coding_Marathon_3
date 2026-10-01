@@ -8,6 +8,7 @@ const {
 } = require("./middleware/customMiddleware");
 require("dotenv").config();
 const vehicleRentalRouter = require("./routes/vehicleRentalRouter");
+const userRouter = require("./routes/userRouter");
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(requestLogger);
 connectDB();
 // Routes
 app.use("/api/vehicleRentals", vehicleRentalRouter);
-//app.use("/api/users", userRouter)
+app.use("/api/users", userRouter);
 
 // Error handling
 app.use(unknownEndpoint);
