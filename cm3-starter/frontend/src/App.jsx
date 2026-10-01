@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages & components
+import Navbar from "./components/Navbar";
 import Home from "./pages/HomePage";
 import AddVehicleRentalPage from "./pages/AddVehicleRentalPage";
-import Navbar from "./components/Navbar";
+import VehicleRentalPage from "./pages/AddVehicleRentalPage";
+import EditVehiclePage from "./pages/EditVehicleRentalPage";
 import NotFoundPage from "./pages/NotFoundPage";
+
 
 const App = () => {
   return (
@@ -14,7 +17,19 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/add-rental" element={<AddVehicleRentalPage />} />
+            <Route 
+              path="/vehicle-rentals/:id"
+              element={<VehicleRentalPage/>}
+            />
+            <Route 
+              path="/add-rental" 
+              element={<AddVehicleRentalPage />} 
+            />
+
+            <Route 
+              path="/edit-vehicle-rentals/:id"
+              element={<EditVehiclePage/>}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
