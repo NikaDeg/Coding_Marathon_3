@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 const EditVehiclePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user ? user.token : null;
 
   const [vehicleModel, setVehicleModel] = useState("");
   const [category, setCategory] = useState("");

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddVehicleRentalPage = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user ? user.token : null;
   const [vehicleModel, setVehicleModel] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
