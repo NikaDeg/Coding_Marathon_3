@@ -82,7 +82,7 @@ const VehicleRentalPage = ({ isAuthenticated }) => {
 
           {
             <>
-              <button onClick={() => navigate(`/edit-vehicle/${vehicle._id}`)}>Edit</button>
+              <button onClick={() => navigate(`/edit-vehicle-rentals/${vehicle._id}`)}>Edit</button>
               <button onClick={() => onDeleteClick(vehicle._id)}>Delete</button>
             </>
           }
