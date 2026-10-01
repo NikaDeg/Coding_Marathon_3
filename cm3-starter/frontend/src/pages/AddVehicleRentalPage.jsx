@@ -49,8 +49,8 @@ const AddVehicleRentalPage = () => {
       category,
       description,
       agency: {
-        name,
-        contactEmail,
+        name: agencyName,
+        contactEmail: agencyEmail,
         fleetSize,
       },
 
@@ -178,7 +178,7 @@ const AddVehicleRentalPage = () => {
           onChange={(e) => setInsurancePolicy(e.target.value)}
         />
 
-        <button>Add Vehicle Rental</button>
+        <button onClick={() => navigate("/")}>Add Vehicle Rental</button>
       </form>
     </div>
   );
