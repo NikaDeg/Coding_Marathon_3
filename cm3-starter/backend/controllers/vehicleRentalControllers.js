@@ -53,14 +53,14 @@ const getVehicleRentalById = async (req, res) => {
 const updateVehicleRental = async (req, res) => {
   // res.send("updateVehicleRental");
         const { vehicleId } = req.params;
-        const user_id = req.user._id;
+        // const user_id = req.user._id;
 
     if (!mongoose.Types.ObjectId.isValid(vehicleId)) {
         return res.status(400).json({ message: "Invalid vehicle ID" });
     }
     try {
         const updatedVehicle = await VehicleRental.findOneAndUpdate(
-            { _id: vehicleId, user_id },
+            { _id: vehicleId },
             { ...req.body},
             { returnDocument: "after" },
         );
@@ -79,14 +79,14 @@ const updateVehicleRental = async (req, res) => {
 const deleteVehicleRental = async (req, res) => {
   // res.send("deleteVehicleRental");
   const { vehicleId } = req.params;
-  const user_id = req.user._id;
+//   const user_id = req.user._id;
 
     if (!mongoose.Types.ObjectId.isValid(vehicleId)) {
         return res.status(400).json({ message: "Invalid vehicle ID" });
     }
 
     try {
-        const deleteVehicle = await VehicleRental.findOneAndDelete({_id: vehicleId, user_id});
+        const deleteVehicle = await VehicleRental.findOneAndDelete({_id: vehicleId});
         if (deleteVehicle){
             res.status(204).send();
         } else {
