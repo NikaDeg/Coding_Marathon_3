@@ -16,7 +16,7 @@ const EditVehiclePage = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
 
-  const [dailyprice, setDailyprice] = useState("");
+  const [dailyPrice, setDailyPrice] = useState("");
   const [listingDate, setListingDate] = useState("");
 
   const [availabilityStatus, setAvailabilityStatus] = useState('available');
@@ -30,7 +30,7 @@ const EditVehiclePage = () => {
       try {
         const res = await fetch(`/api/vehicleRentals/${id}`);
         const data = await res.json();
-        setVehicleModel(data.title);
+        setVehicleModel(data.vehicleModel);
         setCategory(data.category);
         setDescription(data.description);
         setAgencyName(data.agency.name);
@@ -38,8 +38,7 @@ const EditVehiclePage = () => {
         setFleetSize(data.agency.fleetSize)
         setCity(data.location.city)
         setState(data.location.state)
-        setDailyprice(data.dailyPrice)
-        setListingDate(data.listingDate)
+        setDailyPrice(data.dailyPrice)
         setAvailabilityStatus(data.availabilityStatus)
         setBookingDeadline(data.bookingDeadline)
         setInsurancePolicy(data.insurancePolicy)
@@ -78,8 +77,8 @@ const EditVehiclePage = () => {
       category,
       description,
       agency: {
-        name,
-        contactEmail,
+        name: agencyName,
+        contactEmail: agencyEmail,
         fleetSize,
       },
 
@@ -181,16 +180,8 @@ const EditVehiclePage = () => {
           step="0.01" 
           min="0" 
           required
-          value={dailyprice}
-          onChange={(e) => setDailyprice(e.target.value)}
-        />
-
-        <label>Listing Date:</label>
-        <input 
-          type="date" 
-          required
-          value={listingDate}
-          onChange={(e) => setListingDate(e.target.value)}
+          value={dailyPrice}
+          onChange={(e) => setDailyPrice(e.target.value)}
         />
 
         <label>Availability Status:</label>
