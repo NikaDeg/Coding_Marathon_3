@@ -80,12 +80,12 @@ const VehicleRentalPage = ({ isAuthenticated }) => {
           <p>Booking Deadline: {vehicle.bookingDeadline}</p>
           <p>Insurance Policy: {vehicle.insurancePolicy}</p>
 
-          {
+          {isAuthenticated && (
             <>
               <button onClick={() => navigate(`/edit-vehicle-rentals/${vehicle._id}`)}>Edit</button>
               <button onClick={() => onDeleteClick(vehicle._id)}>Delete</button>
             </>
-          }
+          )}
 
         </>
       )}
