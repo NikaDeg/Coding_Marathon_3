@@ -43,7 +43,7 @@ const signupUser = async (req, res) => {
     const user = await User.create({
       name,
       username,
-      password,
+      password: hash,
       phone_number,
       licenseNumber,
       date_of_birth,
