@@ -28,6 +28,7 @@ const AddVehicleRentalPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newVehicle),
       });
